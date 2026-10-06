@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# Local backups of pre-restyle originals
+.backup/
+
+# Demo video build intermediates
+tools/build/
+
+# Unsigned Shortcut (signed copy is committed as Linger.shortcut)
+tools/Linger-unsigned.shortcut
