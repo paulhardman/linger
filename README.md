@@ -1,6 +1,6 @@
 # Linger
 
-Linger is a small web app that slows down or speeds up audio without changing its pitch. You upload an MP3, M4A or WAV file, choose a speed from 70% to 130%, and Linger gives you back the re-timed audio. It's useful for podcasts, voice memos, language practice or learning music by ear.
+Linger is a small web app that slows down or speeds up audio without changing its pitch. You upload an MP3, M4A, WAV or Opus file, choose a speed from 70% to 130%, and Linger gives you back the re-timed audio. It's useful for podcasts, voice memos, language practice or learning music by ear.
 
 It runs on your own Mac and can be used from any browser on the same network. It can also be installed as a home-screen app (PWA), and an Apple Shortcut lets you send audio to it from the iPhone share sheet.
 
@@ -50,7 +50,7 @@ Both apps expose the same endpoint:
 ```
 POST /process
 Content-Type: multipart/form-data
-  file   audio file (.mp3, .m4a, .wav), max 200 MB
+  file   audio file (.mp3, .m4a, .wav, .opus), max 200 MB
   speed  integer 70–130 (default 90)
 ```
 

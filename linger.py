@@ -9,12 +9,13 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024  # 200 MB
 
-ALLOWED_EXTENSIONS = {"mp3", "m4a", "wav"}
+ALLOWED_EXTENSIONS = {"mp3", "m4a", "wav", "opus"}
 
 MIME_MAP = {
     ".mp3": "audio/mpeg",
     ".m4a": "audio/mp4",
     ".wav": "audio/wav",
+    ".opus": "audio/ogg",
 }
 
 MIN_SPEED = 70
@@ -424,12 +425,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   <label>Audio File</label>
   <div class="drop-zone" id="drop-zone">
-    <input type="file" id="audio-file" accept=".mp3,.m4a,.wav">
+    <input type="file" id="audio-file" accept=".mp3,.m4a,.wav,.opus">
     <span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
     <div class="drop-text">
       <strong>Click to choose</strong> or drag and drop
     </div>
-    <div class="file-types">MP3 &nbsp;·&nbsp; M4A &nbsp;·&nbsp; WAV</div>
+    <div class="file-types">MP3 &nbsp;·&nbsp; M4A &nbsp;·&nbsp; WAV &nbsp;·&nbsp; OPUS</div>
     <div id="file-name"></div>
   </div>
 
@@ -502,7 +503,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     const file = e.dataTransfer.files[0];
     if (file) {
       const ext = file.name.split(".").pop().toLowerCase();
-      if (!["mp3","m4a","wav"].includes(ext)) {
+      if (!["mp3","m4a","wav","opus"].includes(ext)) {
         statusEl.textContent = "Unsupported file type.";
         statusEl.className = "error";
         return;
@@ -583,7 +584,7 @@ def process():
         return jsonify({"error": "No file selected."}), 400
 
     if not allowed_file(file.filename):
-        return jsonify({"error": "Unsupported file type. Use MP3, M4A or WAV."}), 400
+        return jsonify({"error": "Unsupported file type. Use MP3, M4A, WAV or OPUS."}), 400
 
     if not speed.isdigit() or not MIN_SPEED <= int(speed) <= MAX_SPEED:
         return jsonify({"error": f"Speed must be between {MIN_SPEED} and {MAX_SPEED}."}), 400
