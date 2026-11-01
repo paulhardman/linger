@@ -2,7 +2,7 @@
 
 Linger is a small web app that slows down or speeds up audio without changing its pitch. You upload an MP3, M4A, WAV or Opus file, choose a speed from 70% to 130%, and Linger gives you back the re-timed audio. It's useful for podcasts, voice memos, language practice or learning music by ear.
 
-It runs on your own Mac and can be used from any browser on the same network. It can also be installed as a home-screen app (PWA), and an Apple Shortcut lets you send audio to it from the iPhone share sheet.
+It runs on a Raspberry Pi on the home network (`10.0.0.202`) and can be used from any browser on the same network. It runs on a Mac too, for development. It can be installed as a home-screen app (PWA), and an Apple Shortcut lets you send audio to it from the iPhone share sheet.
 
 ▶️ **Demo:** [`linger-demo.mp4`](linger-demo.mp4) (38 s, with audio)
 
@@ -21,8 +21,8 @@ It runs on your own Mac and can be used from any browser on the same network. It
 - [`ffmpeg`](https://ffmpeg.org/) on your `PATH`
 
 ```sh
-pip install flask
-brew install ffmpeg   # macOS
+sudo apt install ffmpeg python3-flask   # Raspberry Pi OS
+pip install flask && brew install ffmpeg  # macOS
 ```
 
 ## Usage
@@ -31,9 +31,9 @@ brew install ffmpeg   # macOS
 python3 linger_play.py
 ```
 
-Open <http://localhost:5056>, choose a file, set the speed and press **Process & Play**.
+Open <http://10.0.0.202:5056> (or <http://localhost:5056> on the machine itself), choose a file, set the speed and press **Process & Play**.
 
-Linger listens on `0.0.0.0`, so other devices on your Wi-Fi can reach it at `http://<your-mac-ip>:5056`. You can find the IP with `ipconfig getifaddr en0`.
+Linger listens on `0.0.0.0`, so other devices on your Wi-Fi can reach it. To run it somewhere other than the Pi, find that machine's IP with `hostname -I` (Linux) or `ipconfig getifaddr en0` (macOS).
 
 There's also a variant that **downloads** the processed file instead of playing it:
 
@@ -57,18 +57,18 @@ Content-Type: multipart/form-data
 It returns the processed audio. On error it returns JSON `{"error": ...}`.
 
 ```sh
-curl -F file=@clip.m4a -F speed=80 http://localhost:5056/process -o clip-80.m4a
+curl -F file=@clip.m4a -F speed=80 http://10.0.0.202:5056/process -o clip-80.m4a
 ```
 
 ### iPhone share sheet
 
 iOS Safari doesn't support Web Share Target, so Linger uses an Apple Shortcut instead.
 
-1. Run `python3 linger_play.py` on the Mac. Allow incoming connections if macOS asks.
-2. AirDrop `Linger.shortcut` to the iPhone, tap **Add Shortcut**, and enter the server URL (`http://<mac-ip>:5056/process`).
+1. Make sure `linger_play.py` is running on the Pi.
+2. On the iPhone, open `http://10.0.0.202:5056` in Safari and tap **Get the share-sheet Shortcut** at the bottom of the page (or AirDrop `Linger.shortcut`). Tap **Add Shortcut** and confirm the server URL. The default is `http://10.0.0.202:5056/process`.
 3. Share any audio file (from Voice Memos, Files, Messages and so on), choose **Linger**, then pick a speed. The result opens in Quick Look.
 
-The phone has to be on the same Wi-Fi network as the Mac. DRM-protected Apple Music tracks can't be shared.
+The phone has to be on the same Wi-Fi network as the Pi. If the server moves, rebuild the Shortcut with the new address (see [`tools/README.md`](tools/README.md)); signing it needs a Mac. DRM-protected Apple Music tracks can't be shared.
 
 ## Project structure
 

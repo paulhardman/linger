@@ -21,6 +21,8 @@ MIME_MAP = {
 MIN_SPEED = 70
 MAX_SPEED = 130
 
+SHORTCUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Linger.shortcut")
+
 
 def allowed_file(filename: str) -> bool:
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -396,6 +398,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   #player.ready { display: block; }
 
+  /* iOS Shortcut download */
+  .shortcut-link {
+    display: block;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .shortcut-link strong { color: var(--accent); font-weight: 600; }
+  .shortcut-link:hover strong { text-decoration: underline; }
+
   /* Intro: logo + wordmark, then cross-fade into the card */
   #intro {
     position: fixed;
@@ -509,6 +527,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <button class="submit-btn" id="submit-btn" disabled>Process &amp; Play</button>
   <div id="status"></div>
   <audio id="player" controls></audio>
+
+  <a class="shortcut-link" href="/Linger.shortcut" download>On iPhone? <strong>Get the share-sheet Shortcut</strong></a>
 </div>
 
 <script>
@@ -651,6 +671,16 @@ def manifest():
     response = jsonify(data)
     response.mimetype = "application/manifest+json"
     return response
+
+
+@app.route("/Linger.shortcut")
+def shortcut():
+    return send_file(
+        SHORTCUT_PATH,
+        as_attachment=True,
+        download_name="Linger.shortcut",
+        mimetype="application/octet-stream",
+    )
 
 
 @app.route("/process", methods=["POST"])

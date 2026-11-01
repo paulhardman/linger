@@ -7,7 +7,7 @@ import plistlib
 import sys
 import uuid
 
-SERVER = sys.argv[1] if len(sys.argv) > 1 else "http://192.168.0.177:5056/process"
+SERVER = sys.argv[1] if len(sys.argv) > 1 else "http://10.0.0.202:5056/process"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "Linger-unsigned.shortcut"
 
 U_URL, U_LIST, U_PICK, U_POST = (str(uuid.uuid4()).upper() for _ in range(4))
