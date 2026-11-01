@@ -743,4 +743,9 @@ def process():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0", port=5056)
+    import logging
+
+    from waitress import serve
+
+    logging.basicConfig(level=logging.INFO)  # so waitress prints "Serving on ..."
+    serve(app, host="0.0.0.0", port=5056)

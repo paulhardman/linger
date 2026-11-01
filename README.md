@@ -17,12 +17,12 @@ It runs on a Raspberry Pi on the home network (`10.0.0.202`) and can be used fro
 
 ## Requirements
 
-- Python 3 with [Flask](https://flask.palletsprojects.com/)
+- Python 3 with [Flask](https://flask.palletsprojects.com/) and [Waitress](https://docs.pylonsproject.org/projects/waitress/) (`linger_play.py` runs on Waitress)
 - [`ffmpeg`](https://ffmpeg.org/) on your `PATH`
 
 ```sh
-sudo apt install ffmpeg python3-flask   # Raspberry Pi OS
-pip install flask && brew install ffmpeg  # macOS
+sudo apt install ffmpeg python3-flask python3-waitress   # Raspberry Pi OS
+pip install flask waitress && brew install ffmpeg        # macOS
 ```
 
 ## Usage
@@ -97,5 +97,5 @@ See [`SESSION_LOG.md`](SESSION_LOG.md) for the full step-by-step account.
 
 ## Notes
 
-- Flask's built-in server is fine for personal use on a home network. If you expose Linger more widely, put it behind `waitress` or `gunicorn`.
+- `linger_play.py` is served by Waitress, a production WSGI server. `linger.py` still uses Flask's built-in server, which is fine for personal use on a home network.
 - Ideas for later: an Android share target, and a native iOS app with a Share Extension that processes audio on the device with `AVAudioUnitTimePitch`.
