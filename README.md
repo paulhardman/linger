@@ -78,6 +78,7 @@ The phone has to be on the same Wi-Fi network as the Pi. If the server moves, re
 | `linger.py` | Variant that downloads the result (port 5055) |
 | `static/` | PWA icons (180/192/512 px) |
 | `Linger.shortcut` | Signed iOS/macOS Shortcut for the share sheet |
+| `ios/` | Native iPhone app for the App Store; processes audio on the device (see [`ios/README.md`](ios/README.md)) |
 | `linger-demo.mp4` | Demo video |
 | `tools/` | Scripts that rebuild the demo video, Shortcut and icons (see [`tools/README.md`](tools/README.md)) |
 | `SESSION_LOG.md` | Detailed log of the development session |
@@ -98,4 +99,5 @@ See [`SESSION_LOG.md`](SESSION_LOG.md) for the full step-by-step account.
 ## Notes
 
 - `linger_play.py` is served by Waitress, a production WSGI server. `linger.py` still uses Flask's built-in server, which is fine for personal use on a home network.
-- Ideas for later: an Android share target, and a native iOS app with a Share Extension that processes audio on the device with `AVAudioUnitTimePitch`.
+- A native iPhone app now lives in `ios/` and processes audio on the device with `AVAudioUnitTimePitch`.
+- Ideas for later: an Android share target.

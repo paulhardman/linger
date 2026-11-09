@@ -1,4 +1,4 @@
-"""Regenerate the PWA icons in ../static: white waveform bars on the blue gradient.
+"""Regenerate the PWA icons in ../static and the iOS app icon: white waveform bars on the blue gradient.
 
     python make_icons.py
 """
@@ -7,6 +7,8 @@ import os
 from PIL import Image, ImageDraw
 
 STATIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "static")
+IOS_ICON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "ios", "Linger",
+                        "Assets.xcassets", "AppIcon.appiconset")
 S = 512 * 4  # supersample, then downscale for smooth edges
 
 # (x0, x1, y0, y1) of each bar on a 512px canvas, same geometry as the intro logo
@@ -38,3 +40,7 @@ base = img.resize((512, 512), Image.LANCZOS)
 for name, size in (("icon-512.png", 512), ("icon-192.png", 192), ("apple-touch-icon.png", 180)):
     base.resize((size, size), Image.LANCZOS).save(os.path.join(STATIC, name))
     print("wrote", name)
+
+# iOS app icon: one 1024px opaque PNG; iOS applies the rounded mask itself.
+img.resize((1024, 1024), Image.LANCZOS).save(os.path.join(IOS_ICON, "icon-1024.png"))
+print("wrote ios icon-1024.png")

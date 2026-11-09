@@ -1,0 +1,40 @@
+# Generates Linger.xcodeproj. After editing, run:  cd ios && xcodegen
+name: Linger
+options:
+  bundleIdPrefix: com.paulhardman
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Linger:
+    type: application
+    platform: iOS
+    sources:
+      - Linger
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.paulhardman.linger
+        TARGETED_DEVICE_FAMILY: "1"          # iPhone only for v1
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""                 # pick your team in Xcode > Signing & Capabilities
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    info:
+      path: Linger/Info.plist
+      properties:
+        CFBundleDisplayName: Linger
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIBackgroundModes: [audio]           # preview keeps playing with the screen locked
+        ITSAppUsesNonExemptEncryption: false # skips the export-compliance question
+        LSSupportsOpeningDocumentsInPlace: false
+        # Lets Linger appear in the share sheet / "Open in…" for audio files.
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Audio
+            CFBundleTypeRole: Viewer
+            LSHandlerRank: Alternate
+            LSItemContentTypes: [public.audio]

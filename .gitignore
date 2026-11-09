@@ -15,3 +15,8 @@ tools/build/
 
 # Unsigned Shortcut (signed copy is committed as Linger.shortcut)
 tools/Linger-unsigned.shortcut
+
+# Xcode (iOS app)
+xcuserdata/
+*.xcuserstate
+DerivedData/
