@@ -1,7 +1,7 @@
 # Generates Linger.xcodeproj. After editing, run:  cd ios && xcodegen
 name: Linger
 options:
-  bundleIdPrefix: com.paulhardman
+  bundleIdPrefix: ie.ph
   deploymentTarget:
     iOS: "17.0"
 settings:
@@ -18,7 +18,7 @@ targets:
       - Linger
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.paulhardman.linger
+        PRODUCT_BUNDLE_IDENTIFIER: ie.ph.linger            # matches the App Store Connect record
         TARGETED_DEVICE_FAMILY: "1"          # iPhone only for v1
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: KT996UR5NB         # Paul Hardman (Individual)

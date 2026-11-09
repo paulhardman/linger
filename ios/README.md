@@ -30,6 +30,13 @@ Don't edit the `.xcodeproj` by hand; regeneration overwrites it.
 | `Linger/LingerModel.swift` | App state: import, live preview, export |
 | `Linger/ContentView.swift` | The single screen, theme, logo |
 | `Linger/PrivacyInfo.xcprivacy` | Privacy manifest: no data collected, no tracking |
-| `project.yml` | XcodeGen spec: bundle ID, Info.plist keys, signing |
+| `project.yml` | XcodeGen spec: bundle ID (`ie.ph.linger`), Info.plist keys, signing |
+| `AppStore/listing.md` | App Store Connect text: name, description, keywords, URLs, answers |
+| `AppStore/check_listing.py` | Checks `listing.md` against App Store character limits |
+| `AppStore/screenshots/` | 6.9" iPhone screenshots (1320 × 2868) |
+| `tools/make_screenshots.sh` | Regenerates the screenshots in the simulator |
+
+The privacy policy and support pages are in `../docs/`, served by GitHub Pages at
+<https://paulhardman.github.io/linger/>.
 
 The app icon comes from `tools/make_icons.py`, which also writes the PWA icons.

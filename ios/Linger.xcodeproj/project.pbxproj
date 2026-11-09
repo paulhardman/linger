@@ -217,7 +217,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.paulhardman.linger;
+				PRODUCT_BUNDLE_IDENTIFIER = ie.ph.linger;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -236,7 +236,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.paulhardman.linger;
+				PRODUCT_BUNDLE_IDENTIFIER = ie.ph.linger;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
